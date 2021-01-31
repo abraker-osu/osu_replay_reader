@@ -1,7 +1,7 @@
 import unittest
 
 # Beatmap reading test
-from replay_reader.unit_tests.test_replay import TestReplay
+from unit_tests.test_replay import TestReplay
 
 
 
