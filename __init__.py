@@ -1,1 +1,1 @@
-from .replay_reader import replayIO
+from .replay_reader.replayIO import ReplayIO
