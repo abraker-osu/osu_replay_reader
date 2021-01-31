@@ -156,6 +156,12 @@ class ReplayIO():
 
         events = [ eventstring.split('|') for eventstring in datastring.split(',') ]
 
+        # osu! versions 20130319 or later
+        if int(events[-1][0]) == -12345:
+            # If rnd value is 0, then something is wrong
+            if int(events[-1][3]) == 0:
+                raise ReplayException('Replay might be corrupt!')
+
         if (replay.game_mode == Gamemode.OSU) and replay.mods.has_mod(Mod.HardRock):
             replay.play_data = np.asarray([ 
                 [ int(event[ReplayIdx.DT]), float(event[ReplayIdx.PX]), Replay.PLAYFIELD_HEIGHT - float(event[ReplayIdx.PY]), int(event[ReplayIdx.KP]) ] 
