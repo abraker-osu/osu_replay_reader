@@ -1,4 +1,5 @@
 from osu_interfaces import IReplay
+from .replay_idx import ReplayIdx
 from .gamemode import Gamemode
 
 
@@ -27,6 +28,7 @@ class Replay(IReplay):
         self.life_bar_data = None
         self.timestamp     = None
         self.play_data     = None
+        self.mania_keys    = None
 
 
     def is_md5_match(self, md5_hash):
@@ -68,10 +70,24 @@ class Replay(IReplay):
         return str(self.mods)
 
 
-    def get_event_times(self):
-        if not self.event_times:
-            self.__process_event_times()
-        return self.event_times
+    def get_time_data(self):
+        return self.play_data[:, ReplayIdx.DT]
+
+
+    def get_press_data(self):
+        return self.play_data[:, ReplayIdx.KP]
+
+    
+    def get_xpos_data(self):
+        return self.play_data[:, ReplayIdx.PX]
+
+
+    def get_ypos_data(self):
+        return self.play_data[:, ReplayIdx.PY]
+
+
+    def get_mania_keys(self):
+        return self.mania_keys
 
 
     def get_data_at_time(self, time, selector=None):

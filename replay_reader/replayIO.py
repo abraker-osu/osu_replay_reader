@@ -4,7 +4,10 @@ import lzma
 import math
 import os
 
+import numpy as np
+
 from .replay import Replay
+from .replay_idx import ReplayIdx
 from .gamemode import Gamemode
 from .mod import Mod
 
@@ -21,11 +24,6 @@ class ReplayIO():
     __SHORT = 2
     __INT   = 4
     __LONG  = 8
-
-    DT = 0  # Delta time
-    PX = 1  # Position X
-    PY = 2  # Position Y
-    KP = 3  # Keys pressed
 
     """
     Opens a replay file and reads it
@@ -159,20 +157,20 @@ class ReplayIO():
         events = [ eventstring.split('|') for eventstring in datastring.split(',') ]
 
         if (replay.game_mode == Gamemode.OSU) and replay.mods.has_mod(Mod.HardRock):
-            replay.play_data = [ 
-                [ int(event[ReplayIO.DT]), float(event[ReplayIO.PX]), Replay.PLAYFIELD_HEIGHT - float(event[ReplayIO.PY]), int(event[ReplayIO.KP]) ] 
+            replay.play_data = np.asarray([ 
+                [ int(event[ReplayIdx.DT]), float(event[ReplayIdx.PX]), Replay.PLAYFIELD_HEIGHT - float(event[ReplayIdx.PY]), int(event[ReplayIdx.KP]) ] 
                 for event in events if int(event[0]) != -12345
-            ]
+            ])
         else:
-            replay.play_data = [ 
-                [ int(event[ReplayIO.DT]), float(event[ReplayIO.PX]), float(event[ReplayIO.PY]), int(event[ReplayIO.KP]) ] 
+            replay.play_data = np.asarray([ 
+                [ int(event[ReplayIdx.DT]), float(event[ReplayIdx.PX]), float(event[ReplayIdx.PY]), int(event[ReplayIdx.KP]) ] 
                 for event in events if int(event[0]) != -12345 
-            ]
+            ])
         
         if replay.game_mode == Gamemode.MANIA:
             # Calculate number of keys used in the replay for mania
-            largest_key_event = max(replay.play_data, key=lambda event: event[ReplayIO.PX])
-            replay.mania_keys = int(math.log(largest_key_event[ReplayIO.PX], 2)/2)
+            largest_key_event = max(replay.play_data, key=lambda event: event[ReplayIdx.PX])
+            replay.mania_keys = int(math.log(largest_key_event[ReplayIdx.PX], 2)/2)
 
 
     @classmethod
