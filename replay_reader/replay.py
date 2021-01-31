@@ -1,7 +1,9 @@
+from osu_interfaces import IReplay
 from .gamemode import Gamemode
 
 
-class Replay():
+
+class Replay(IReplay):
 
     PLAYFIELD_WIDTH  = 512  # osu!px
     PLAYFIELD_HEIGHT = 384  # osu!px

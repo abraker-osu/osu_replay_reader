@@ -1,0 +1,3 @@
+[submodule "osu_interfaces"]
+	path = osu_interfaces
+	url = git@github.com:abraker-osu/osu_interfaces.git
