@@ -1,4 +1,3 @@
-import osrparse
 import datetime
 import struct
 import lzma
