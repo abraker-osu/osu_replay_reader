@@ -1,4 +1,5 @@
 import unittest
+import numpy as np
 
 from replay_reader.replayIO import ReplayIO
 
