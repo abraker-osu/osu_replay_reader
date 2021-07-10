@@ -176,6 +176,8 @@ class ReplayIO():
                 is_key_hold = (largest_key_event & (1 << col)) > 0
                 if is_key_hold:
                     replay.mania_keys = max(replay.mania_keys, col)
+            
+            replay.mania_keys += 1
 
 
     @classmethod
