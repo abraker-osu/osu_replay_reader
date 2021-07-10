@@ -169,9 +169,12 @@ class ReplayIO():
         
         if replay.game_mode == Gamemode.MANIA:
             # Calculate number of keys used in the replay for mania
-            replay.mania_keys = 0
-            largest_key_event = int(np.max(replay.play_data[:, ReplayIdx.PX]))
+            invalid_filter = replay.play_data[:, ReplayIdx.PY] >= 0
+            key_presses = replay.play_data[invalid_filter, ReplayIdx.PX]
+            largest_key_event = int(np.max(key_presses))
             
+            replay.mania_keys = 0
+
             for col in range(20):
                 is_key_hold = (largest_key_event & (1 << col)) > 0
                 if is_key_hold:
