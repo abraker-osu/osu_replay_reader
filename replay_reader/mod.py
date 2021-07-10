@@ -84,13 +84,26 @@ class Mod():
 
 
     def has_mod(self, mod):
-        if not mod in Mod.data:
-            raise ValueError(f'Invalid mod   value = {value}')
+        # If it's string, resolve to value
+        if type(mod) == str:
+            if not mod in list(Mod.data.values()):
+                raise ValueError(f'Invalid mod   mod = {mod}')
 
-        if mod == Mod.NoMod:
+            mod_value = list(Mod.data.keys())[list(Mod.data.values()).index(mod)]
+        # Else if it's a mod value
+        elif type(mod) == int:
+            mod_value = mod
+        # Unknown
+        else:
+            raise ValueError(f'Invalid mod   mod = {mod}')
+
+        if not mod_value in Mod.data:
+            raise ValueError(f'Invalid mod   mod = {mod}')
+
+        if mod_value == Mod.NoMod:
             return self.value == 0
             
-        return self.value & mod > 0
+        return (self.value & mod_value) > 0
 
 
     def add_mod(self, mod):
