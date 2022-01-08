@@ -108,14 +108,14 @@ class Mod():
 
     def add_mod(self, mod):
         if not mod in Mod.data:
-            raise ValueError(f'Invalid mod   value = {value}')
+            raise ValueError(f'Invalid mod   value = {mod}')
 
         self.value |= mod
 
 
     def rmv_mod(self, mod):
         if not mod in Mod.data:
-            raise ValueError(f'Invalid mod   value = {value}')
+            raise ValueError(f'Invalid mod   value = {mod}')
 
         self.value &= ~mod
 
