@@ -29,6 +29,7 @@ class Replay(IReplay):
         self.timestamp     = None
         self.play_data     = None
         self.mania_keys    = None
+        self.score_id      = None
 
 
     def is_md5_match(self, md5_hash):

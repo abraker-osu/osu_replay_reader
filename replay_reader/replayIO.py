@@ -56,7 +56,8 @@ class ReplayIO():
         ReplayIO.__parse_life_bar_data(replay_data, replay)
         replay_length = ReplayIO.__parse_timestamp_and_replay_length(replay_data, replay)
         ReplayIO.__parse_play_data(replay_data, replay, replay_length)
-        
+        ReplayIO.__parse_score_id(replay_data, replay)
+
         return replay
 
 
@@ -181,6 +182,14 @@ class ReplayIO():
                     replay.mania_keys = max(replay.mania_keys, col)
             
             replay.mania_keys += 1
+
+
+    @classmethod
+    def __parse_score_id(cls, replay_data, replay):
+        fmt = '<q'
+        (replay.score_id,) = struct.unpack_from(fmt, replay_data, cls.__offset)
+        
+        cls.__offset += struct.calcsize(fmt)
 
 
     @classmethod
