@@ -129,7 +129,7 @@ class Mod():
             if self.value & mod > 0:
                 mods_txt.append(txt)
 
-        return mods_txt
+        return ''.join(mods_txt)
 
 
     def __is_valid(self, value):
