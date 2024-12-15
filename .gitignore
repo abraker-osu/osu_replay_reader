@@ -1,3 +1,5 @@
 /.vscode/*
 *.pyc
 /venv/*
+/build/*
+/repaly_reader.egg-info/*
