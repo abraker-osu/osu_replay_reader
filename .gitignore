@@ -2,4 +2,4 @@
 *.pyc
 /venv/*
 /build/*
-/repaly_reader.egg-info/*
+/replay_reader.egg-info/*
