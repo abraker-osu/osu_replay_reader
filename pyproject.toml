@@ -1,0 +1,22 @@
+[build-system]
+requires      = [ "setuptools >= 64", 'setuptools_scm[toml] >=8 ' ]
+build-backend = "setuptools.build_meta"
+
+[project]
+name            = "replay-reader"
+description     = "Python library for reading osu! *.osr files"
+readme          = "README.md"
+requires-python = ">= 3.10"
+dynamic         = [ "version" ]
+
+dependencies = [
+    "numpy >= 1.22.0, < 2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/abraker-osu/osu_replay_reader"
+
+[tool.setuptools.package-dir]
+replay_reader = "src"
+
+[tool.setuptools_scm]

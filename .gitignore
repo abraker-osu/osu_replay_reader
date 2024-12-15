@@ -1,3 +1,5 @@
-/.vscode/*
 *.pyc
 /venv/*
+/build/*
+/replay_reader.egg-info/*
+/.vscode/settings.json
